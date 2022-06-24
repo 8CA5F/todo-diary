@@ -9,5 +9,6 @@ router.post('/', todoController.createTodo);
 router.delete('/:id', todoController.deleteTodo);
 router.patch('/:id', todoController.updateTodoIsCompeleted);
 router.get('/query/:query', todoController.getTodosByQuery);
+router.get('/deleteCompletedTodos', todoController.deleteCompletedTodos);
 
 module.exports = router;

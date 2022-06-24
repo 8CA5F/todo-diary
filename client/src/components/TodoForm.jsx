@@ -7,10 +7,13 @@ import { useDispatch } from 'react-redux';
 import { createTodo } from '../store/actions/TodoActions';
 
 const todoSchema = Yup.object({
-    title: Yup.string().max(30, 'Title has a maximum limit of 30 characters.'),
-    detail: Yup.string()
+    title: Yup.string()
         .required()
-        .max(240, 'Detail has a maximum limit of 240 characters.'),
+        .max(30, 'Title has a maximum limit of 30 characters.'),
+    detail: Yup.string().max(
+        235,
+        'Detail has a maximum limit of 240 characters.'
+    ),
 });
 
 const TodoForm = () => {
@@ -29,30 +32,29 @@ const TodoForm = () => {
     };
 
     return (
-        <div className="flex flex-col justify-center items-center">
+        <div className="flex flex-col items-center mt-[30%]">
             <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
-                <h2 className="text-xl text-center mb-10 font-semibold">
-                    Create a To-Do
-                </h2>
                 {/* title input */}
                 <div>
                     <input
                         type="text"
                         {...register('title')}
-                        className="w-72 h-10 rounded drop-shadow-lg border outline-none px-4 capitalize placeholder:italic placeholder:text-base placeholder:font-thin placeholder:normal-case"
+                        className="w-72 h-10 rounded drop-shadow-lg border outline-none px-4 placeholder:italic placeholder:text-base placeholder:font-thin placeholder:normal-case"
                         placeholder="Title"
                     />
-                    <div className="h-8">{errors.title?.message}</div>
+                    <div className="h-8 text-red-500 capitalize font-medium">
+                        {errors.title?.message}
+                    </div>
                 </div>
                 {/* detail input */}
                 <div>
                     <textarea
                         type="text"
                         {...register('detail')}
-                        className="w-72 h-44 rounded drop-shadow-lg border outline-none p-4 capitalize resize-none placeholder:italic placeholder:text-base placeholder:font-thin placeholder:normal-case"
+                        className="w-72 h-44 rounded drop-shadow-lg border outline-none p-4 resize-none placeholder:italic placeholder:text-base placeholder:font-thin placeholder:normal-case whitespace-normal"
                         placeholder="Detail (optional)"
                     />
-                    <div className="h-8 text-red-500">
+                    <div className="h-8 text-red-500 capitalize font-medium">
                         {errors.detail?.message}
                     </div>
                 </div>

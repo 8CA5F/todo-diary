@@ -6,7 +6,7 @@ import TodoFilter from '../../components/TodoFilter';
 
 const TodoPage = () => {
     return (
-        <div className="h-[calc(100%-4rem)] flex items-center">
+        <div className="h-[calc(100%-4rem)] max-h-[calc(100%-4rem)] flex">
             <div className="w-1/3">
                 <TodoFilter />
             </div>

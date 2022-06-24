@@ -7,12 +7,12 @@ const todoSchema = new Schema({
     title: {
         type: String,
         max: 30,
-        required: false,
+        required: true,
     },
     detail: {
         type: String,
-        max: 240,
-        required: true,
+        max: 235,
+        required: false,
     },
     isCompleted: {
         type: Boolean,

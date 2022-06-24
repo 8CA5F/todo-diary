@@ -6,12 +6,11 @@ exports.getTodos = async (req, res) => {
         res.status(200).json(todos);
     } catch (error) {
         res.status(404).json({ message: error.message });
-        console.log('wtf');
     }
 };
 
 exports.createTodo = async (req, res) => {
-    const todo = new Todo(req.body);
+    const todo = await new Todo(req.body);
     try {
         await todo.save();
         res.status(201).json(todo);
@@ -24,7 +23,7 @@ exports.deleteTodo = async (req, res) => {
     const id = req.params.id;
     try {
         const deletedTodo = await Todo.findByIdAndRemove(id);
-        res.status(204).json(deletedTodo);
+        res.status(202).json({ deletedTodoId: deletedTodo._id });
     } catch (error) {
         res.status(409).json({ message: error.message });
     }
@@ -51,6 +50,18 @@ exports.getTodosByQuery = async (req, res) => {
         ]);
         res.status(200).json(todos);
     } catch (error) {
-        res.status(404).json({ message: error.message });
+        res.status(409).json({ message: error.message });
+    }
+};
+
+exports.deleteCompletedTodos = async (req, res) => {
+    try {
+        await Todo.deleteMany({
+            isCompleted: true,
+        });
+        const newTodos = await Todo.find();
+        res.status(202).json(newTodos);
+    } catch (error) {
+        res.status(409).json({ message: error.message });
     }
 };

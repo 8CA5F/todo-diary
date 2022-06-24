@@ -2,30 +2,44 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer{
+@layer utilities{
   html, body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
   }
 
-  ::-webkit-scrollbar {
-    width: 7px;
-  }
-  
-  /* Track */
-  ::-webkit-scrollbar-track {
-    background: #f1f1f1;
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
   }
 
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-    background: #d4d4d8;
-    border-radius: 15px;
-  }
-  
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-    background: #a1a1aa; 
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrolbar-width: none;
   }
 }
+
+.completed-todo {
+  @apply
+  h-40
+  my-4
+  border-2
+  drop-shadow-md
+  rounded-md flex
+  justify-between
+  px-4 items-center
+  line-through
+  bg-slate-100
+  text-gray-400
+};
+
+.incomplete-todo {
+  @apply
+  h-40
+  my-4
+  border-2
+  drop-shadow-md
+  rounded-md flex
+  justify-between
+  px-4 items-center
+};
